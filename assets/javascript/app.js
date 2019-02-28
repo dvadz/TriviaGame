@@ -8,7 +8,7 @@ var global_timeRemaining = 30;
 var TriviaGame = {
 
     questionNumber: 0
-    ,yourAnswers : []
+    ,playerAnswers : []
     ,questions : [
         {
             question: "Who is the Prime Minister of Canada"
@@ -45,7 +45,7 @@ var TriviaGame = {
     ]
     ,initialize : function() {
         if(debug){console.log("TriviaGame: initialize")};
-        this.yourAnswers = [];
+        this.playerAnswers = [];
         questionNumber = 0;
     }
     ,getTheNextQuestion: function(questionNumber){
@@ -53,8 +53,8 @@ var TriviaGame = {
         questionNumber++;
     }    
     ,saveMyAnswer: function(myAnswer) {
-        this.yourAnswers.push(myAnswer);
-        if(debug){console.log("TriviaGame: saveMyAnswer "), this.yourAnswers};
+        this.playerAnswers.push(myAnswer);
+        if(debug){console.log("TriviaGame: saveMyAnswer "), this.playerAnswers};
     }
     ,getTotalNumberOfQuestions(){
         if(debug){console.log("TriviaGame: getTotalNumberOfQuestions ", this.questions.length,);};
@@ -76,10 +76,10 @@ function startTriviaGame() {
 function postTheQuestion(theQuestion) {
     if(debug) {console.log("function: postTheQuestion ",theQuestion);}
     $("#question").text(theQuestion.question)
-    $("label[for = options_index_0]").text(theQuestion.choices[0]);
-    $("label[for = options_index_1]").text(theQuestion.choices[1]);
-    $("label[for = options_index_2]").text(theQuestion.choices[2]);
-    $("label[for = options_index_3]").text(theQuestion.choices[3]);
+    $("#option0").text(theQuestion.choices[0]);
+    $("#option1").text(theQuestion.choices[1]);
+    $("#option2").text(theQuestion.choices[2]);
+    $("#option3").text(theQuestion.choices[3]);
 }
 
 function startTheTimer() {
@@ -93,9 +93,9 @@ function startTheTimer() {
 
 function start30SecondTimer() {
     if(debug){console.log("function: run30secondTimerl");}
-    thirty_second_timer = setTimeout(timeIsUP, 30000);
-    $("#timer").text("30");
-    global_timeRemaining = 30;
+    global_timeRemaining = 5;
+    thirty_second_timer = setTimeout(timeIsUP, global_timeRemaining * 1000);
+    $("#timer").text(global_timeRemaining);
     //start a 1 second timer that will refresh the 'time remaining' every second
     startOneSecondTimer();
 }
@@ -106,7 +106,7 @@ function startOneSecondTimer() {
 }
 
 function refreshTheClock() {
-    if(debug){console.log("function: refreshTheClock");}
+    if(debug){console.log("function: refreshTheClock", global_timeRemaining);}
     global_timeRemaining--;
     $("#timer").text(global_timeRemaining);
     if(global_timeRemaining===0){
@@ -119,7 +119,6 @@ function timeIsUP() {
     if(debug){console.log("function: timeIsUp ");}
 
     //TODO: get the player's answer
-
     //TODO: get the next question
 
     //TODO: check that question is not 'undefined'
@@ -129,6 +128,23 @@ function timeIsUP() {
     //TODO: start the timer
 }
 
+function getWhichOptionThePlayerSelected() {
+    var radioButtons, selected;
+
+    //get all the radio buttons
+    radioButtons = document.getElementsByName("options");
+    if(debug){console.log("function: getWhichOptionThePlayerSelected", radioButtons);}
+    
+    //check which button was selected
+    radioButtons.forEach(function(option){
+        if(option.checked===true) {
+           selected = option.value;
+        }
+    });
+
+    TriviaGame.playerAnswers.push(selected);
+    if(debug){console.log("playAnswers[] ", TriviaGame.playerAnswers);}
+}
 
 $("#start").on("click", function(){
     startTriviaGame();
