@@ -1,44 +1,44 @@
 var debug = true;
 
 //timers
-var thirty_second_timeout, one_second_interval;
+var global_thirty_second_timeout, global_one_second_interval;
 
-var timeRemaining = 30;
+var global_timeRemaining = 30;
 
 var TriviaGame = {
 
-    currentQuestion: 0
+    questionNumber: 0
     ,yourAnswers : []
     ,questions : [
         {
-            question: "This is question1"
+            question: "Who is the Prime Minister of Canada"
             ,choices: [
-                "choice1" 
-                ,"choice2" 
-                ,"choice3"
-                ,"choice4"
-            ]
-            ,correctAnswer: 0
-        }
-    
-        ,{
-            question: "This is question2"
-            ,choices: [
-                "choice1"
-                ,"choice2"
-                ,"choice3"
-                ,"choice4"
+                "Pierre Trudeau" 
+                ,"Justin TimberLake" 
+                ,"Justin Trudeau"
+                ,"Stephen Harper "
             ]
             ,correctAnswer: 2
         }
     
         ,{
-            question: "This is question3"
+            question: "Which country lies on the southern border of Canada"
             ,choices: [
-                ,"choice1"
-                ,"choice2"
-                ,"choice3"
-                ,"choice4"
+                "Mexico"
+                ,"USA"
+                ,"Russia"
+                ,"Alaska"
+            ]
+            ,correctAnswer: 1
+        }
+    
+        ,{
+            question: "What is the Raptors"
+            ,choices: [
+                ,"baseball team"
+                ,"football team"
+                ,"soccer team"
+                ,"basketball team"
             ]
             ,correctAnswer: 3
         }
@@ -46,11 +46,11 @@ var TriviaGame = {
     ,initialize : function() {
         if(debug){console.log("TriviaGame: initialize")};
         this.yourAnswers = [];
-        timeRemaining
+        questionNumber = 0;
     }
-    ,getTheCurrentQuestion: function(whichQuestion){
-        if(debug){console.log("TriviaGame: getTheCurrentQuestion ", this.questions[whichQuestion]);};
-
+    ,getTheNextQuestion: function(questionNumber){
+        if(debug){console.log("TriviaGame: getTheCurrentQuestion ", this.questions[questionNumber]);};
+        questionNumber++;
     }    
     ,saveMyAnswer: function(myAnswer) {
         this.yourAnswers.push(myAnswer);
@@ -63,24 +63,14 @@ var TriviaGame = {
 }
 
 
-function letsPlayTriviaGame() {
-    'use strict'
-
+function startTriviaGame() {
     if(debug){console.log("function: letsPlayTriviaGame");}
-    var TotalNumberOfQuestions = TriviaGame.getTotalNumberOfQuestions();
-
-    var timer_ForAQuestion;
-    var interval_RefreshTheClock;
- 
     //get a question
     var theCurrentQuestion = TriviaGame.questions[0];
     //post the question
     postTheQuestion(theCurrentQuestion);
     //start a 30 second timer
     startTheTimer();
-    
-
-    // interval_RefreshTheClock = setInterval(refreshTheClock(), 1000);
 }
 
 function postTheQuestion(theQuestion) {
@@ -93,38 +83,53 @@ function postTheQuestion(theQuestion) {
 }
 
 function startTheTimer() {
+    if(debug){console.log("function: startTheTimer ");}
     //clear the '30s timeout' and '1s interval"
-    clearTimeout(thirty_second_timeout);
-    clearInterval(one_second_interval);
-    //restart the 30s timer
-    thirty_second_timer = setTimeout(timeIsUP, 30000);
-    $("#timer").text("30");
-    timeRemaining = 30;
-    //start another timer to refresh the clock every second
-    one_second_interval = setInterval(refreshTheClock, 1000);
-
+    clearTimeout(global_thirty_second_timeout);
+    clearInterval(global_one_second_interval);
+    //start the 30s timer
+    start30SecondTimer();
 }
 
-function one_second_interval() {
-    if(debug){console.log("function: one_second_interval");}
+function start30SecondTimer() {
+    if(debug){console.log("function: run30secondTimerl");}
+    thirty_second_timer = setTimeout(timeIsUP, 30000);
+    $("#timer").text("30");
+    global_timeRemaining = 30;
+    //start a 1 second timer that will refresh the 'time remaining' every second
+    startOneSecondTimer();
+}
+
+function startOneSecondTimer() {
+    if(debug){console.log("function: startOneSecondTimer");}
+    global_one_second_interval = setInterval(refreshTheClock, 1000);
+}
+
+function refreshTheClock() {
+    if(debug){console.log("function: refreshTheClock");}
+    global_timeRemaining--;
+    $("#timer").text(global_timeRemaining);
+    if(global_timeRemaining===0){
+        if(debug) {console.log("stopped refreshing time remaining");}
+        clearInterval(global_one_second_interval);
+    }
 }
 
 function timeIsUP() {
     if(debug){console.log("function: timeIsUp ");}
 
+    //TODO: get the player's answer
+
+    //TODO: get the next question
+
+    //TODO: check that question is not 'undefined'
+
+    //TODO: post the the next question
+
+    //TODO: start the timer
 }
 
-function refreshTheClock() {
-    if(debug){console.log("function: refreshTheClock");}
-    timeRemaining--;
-    $("#timer").text(timeRemaining);
-    if(timeRemaining===0){
-        if(debug) {console.log("stopped refreshing time remaining");}
-        clearInterval(one_second_interval);
-    }
-}
 
 $("#start").on("click", function(){
-    letsPlayTriviaGame();
+    startTriviaGame();
 });
-
