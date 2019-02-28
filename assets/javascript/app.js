@@ -1,46 +1,52 @@
 var debug = true;
 
+//timers
+var thirty_second_timeout, one_second_interval;
+
+var timeRemaining = 30;
+
 var TriviaGame = {
 
     currentQuestion: 0
     ,yourAnswers : []
     ,questions : [
         {
-            Question: "This is question1"
-            ,Choices: [
+            question: "This is question1"
+            ,choices: [
                 "choice1" 
                 ,"choice2" 
                 ,"choice3"
                 ,"choice4"
             ]
-            ,Answer: 0
+            ,correctAnswer: 0
         }
     
         ,{
-            Question: "This is question2"
-            ,Choices: [
+            question: "This is question2"
+            ,choices: [
                 "choice1"
                 ,"choice2"
                 ,"choice3"
                 ,"choice4"
             ]
-            ,Answer: 2
+            ,correctAnswer: 2
         }
     
         ,{
-            Question: "This is question3"
-            ,Choices: [
+            question: "This is question3"
+            ,choices: [
                 ,"choice1"
                 ,"choice2"
                 ,"choice3"
                 ,"choice4"
             ]
-            ,Answer: 3
+            ,correctAnswer: 3
         }
     ]
     ,initialize : function() {
         if(debug){console.log("TriviaGame: initialize")};
         this.yourAnswers = [];
+        timeRemaining
     }
     ,getTheCurrentQuestion: function(whichQuestion){
         if(debug){console.log("TriviaGame: getTheCurrentQuestion ", this.questions[whichQuestion]);};
@@ -66,36 +72,57 @@ function letsPlayTriviaGame() {
     var timer_ForAQuestion;
     var interval_RefreshTheClock;
  
-    // TODO: post a question
+    //get a question
     var theCurrentQuestion = TriviaGame.questions[0];
-    askTheQuestion(theCurrentQuestion);
-    // TODO: start a 30 second timer
-
+    //post the question
+    postTheQuestion(theCurrentQuestion);
+    //start a 30 second timer
+    startTheTimer();
     
-    timer_ForAQuestion = setInterval();
 
-    interval_RefreshTheClock = setInterval(refreshTheClock(), 1000);
+    // interval_RefreshTheClock = setInterval(refreshTheClock(), 1000);
 }
 
-function askTheQuestion(theQuestion) {
-    var question,choices,correctAnswer,yourAnswer;
-    
-    question = theQuestion.question;
-    choices  = theQuestion.choices;
-    correctAnswer = theQuestion.answer;
+function postTheQuestion(theQuestion) {
+    if(debug) {console.log("function: postTheQuestion ",theQuestion);}
+    $("#question").text(theQuestion.question)
+    $("label[for = options_index_0]").text(theQuestion.choices[0]);
+    $("label[for = options_index_1]").text(theQuestion.choices[1]);
+    $("label[for = options_index_2]").text(theQuestion.choices[2]);
+    $("label[for = options_index_3]").text(theQuestion.choices[3]);
+}
 
+function startTheTimer() {
+    //clear the '30s timeout' and '1s interval"
+    clearTimeout(thirty_second_timeout);
+    clearInterval(one_second_interval);
+    //restart the 30s timer
+    thirty_second_timer = setTimeout(timeIsUP, 30000);
+    $("#timer").text("30");
+    timeRemaining = 30;
+    //start another timer to refresh the clock every second
+    one_second_interval = setInterval(refreshTheClock, 1000);
 
 }
 
-function refreshTheClock(timeRemaining) {
+function one_second_interval() {
+    if(debug){console.log("function: one_second_interval");}
+}
+
+function timeIsUP() {
+    if(debug){console.log("function: timeIsUp ");}
+
+}
+
+function refreshTheClock() {
     if(debug){console.log("function: refreshTheClock");}
-    $("#timer").text()
+    timeRemaining--;
+    $("#timer").text(timeRemaining);
+    if(timeRemaining===0){
+        if(debug) {console.log("stopped refreshing time remaining");}
+        clearInterval(one_second_interval);
+    }
 }
-
-function askAQuestion() {
-    if(debug){console.log("function: askAQuestion");}    
-    //run an interval which refreshes the timer every second
-}    
 
 $("#start").on("click", function(){
     letsPlayTriviaGame();
