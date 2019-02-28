@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <title>Trivia Game</title>
+</head>
+<body>
+    <div class="container">
+    <div class="jumbotron">
+        <h1>Welcome to the...</h1>
+    </div>    
+
+    <div class="row">
+        <p>REMAINING TIME <span id="timer border">timer here</span></p>
+    </div>
+
+    <div class="row">
+        <form id="form_question" action="" class="border">
+            <p id="question">Ask me anything...I may choose to answer</p>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="options" id="options_index_0" value="0">
+                <label class="form-check-label" for="options_index_0">1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="options" id="options_index_1" value="2">
+                <label class="form-check-label" for="options_index_1">2</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="options" id="options_index_2" value="2">
+                <label class="form-check-label" for="options_index_2">3</label>
+            </div>  
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="options" id="options_index_3" value="3">
+                <label class="form-check-label" for="options_index_3">4</label>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <button id="start">START</button>
+    </div>
+
+</div>    
+    <script src="./assets/javascript/app.js"></script>
+</body>
+</html>
