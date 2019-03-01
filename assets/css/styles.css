@@ -1,0 +1,34 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px dotted red;
+    font-size: 2em;
+    font-family: 'Cabin Sketch', cursive;
+}
+.heading {
+    margin: 15px 0;
+    font-family: 'Monoton', cursive;
+    border: 2px solid blue;
+}
+.display_time {
+    border: 2px solid blue;
+}
+
+.options:hover {
+    border: 5px solid blue;
+    cursor: pointer;
+}
+.options {
+    /* border: 1px solid blue; */
+}
+.player-clicked {
+    border: 5px solid blue;
+
+}
+.correct-answer {
+    border: 5px solid green;
+}
+.hidden {
+    display: none;
+}
