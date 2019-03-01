@@ -4,32 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Monoton" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
     <title>Trivia Game</title>
 </head>
 <body>
     <div class="container">
-    <div class="jumbotron">
-        <h1>Welcome to the...</h1>
+    <div class="heading">
+        <h1>Javascript </h1>
+         <h1>Trivia</h1>
     </div>    
-
-    <div class="row">
-        <p>REMAINING TIME <span id="timer" class="border">timer here</span></p>
+    
+    <div class="row container_time">
+        <p class="">time left<span id="timer" class=""> 00:00</span></p>
     </div>
 
     <div class="row">
-        <div>
-            <p id="question">Ask me anything...I may choose to answer</p>
-            <p id="option0" value="0" ></p>
-            <p id="option1" value="1" ></p>
-            <p id="option2" value="2" ></p>
-            <p id="option3" value="3" ></p>
+        <div class="container_question">
+                <p id="question">Let's test your basic Javascript knowlege.</p>
+        </div>
+        <div class="row container_options">
+            <div>
+                <p id="option0" class="options" value="0" ></p>
+                <p id="option1" class="options" value="1" ></p>
+                <p id="option2" class="options" value="2" ></p>
+                <p id="option3" class="options" value="3" ></p>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <button id="start">START</button>
+    <div class="row container_button">
+        <button id="start">Let's Play</button>
     </div>
 
 </div>    
