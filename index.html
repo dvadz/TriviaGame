@@ -13,32 +13,29 @@
 <body>
     <div class="container">
     <div class="heading">
-        <h1>Javascript </h1>
+        <h1>Javascript<span class="music">&#9835</span></h1>
          <h1>Trivia</h1>
     </div>    
-    
-    <div class="row container_time">
-        <p class="">time left<span id="timer" class=""> 00:00</span></p>
-    </div>
-
-    <div class="row">
+    <div>
         <div class="container_question">
-                <p id="question">Let's test your basic Javascript knowlege.</p>
+                <p id="question">How is your basic Javascript?</p>
         </div>
-        <div class="row container_options">
+        <div class="container_options">
             <div>
-                <p id="option0" class="options" value="0" ></p>
-                <p id="option1" class="options" value="1" ></p>
-                <p id="option2" class="options" value="2" ></p>
-                <p id="option3" class="options" value="3" ></p>
+                <p><span id="option0" class="options" value="0">Bring it on</span><span id="hand0" class="hand hidden">&#9756</span> </p>
+                <p><span id="option1" class="options" value="1">Bring it on</span><span id="hand1" class="hand hidden">&#9756</span> </p>
+                <p><span id="option2" class="options" value="2">Bring it on</span><span id="hand2" class="hand hidden">&#9756</span> </p>
+                <p><span id="option3" class="options" value="3">Bring it on</span><span id="hand3" class="hand hidden">&#9756</span> </p>
             </div>
         </div>
     </div>
 
-    <div class="row container_button">
-        <button id="start">Let's Play</button>
+    <div class="container_button">
+        <button id="btn_start">Let's Play</button>
     </div>
-
+    <div class="container_timer hidden">
+        <p class="label">time <span class="clock"> 00:00</span></p>
+    </div>
 </div>    
     <script src="./assets/javascript/app.js"></script>
 </body>
