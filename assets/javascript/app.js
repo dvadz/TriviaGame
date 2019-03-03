@@ -4,7 +4,10 @@ var debug = true;
 //timers
 var global_thirty_second_timeout, global_one_second_interval;
 
-var global_timeRemaining = 30;
+//numbers in seconds
+var global_timeRemaining, global_timeAllotted = 20;
+var global_show_answer_timeout = 3;
+var global_wait_while_answer_displayed = false;
 
 var TriviaGame = {
 
@@ -16,19 +19,39 @@ var TriviaGame = {
     ,gameOver: false
     ,questions : [
         {
-            question: "Who is the Prime Minister of Canada"
-            ,choices: ["Pierre Trudeau", "Justin TimberLake", "Justin Trudeau", "Stephen Harper "]
+            question: "Which is NOT a primitive?"
+            ,choices: ["string", "number", "array", "boolean"]
             ,correctAnswer: 2
         }
         ,{
-            question: "Which country lies on the southern border of Canada"
-            ,choices: ["Mexico", "USA", "Russia", "Alaska"]
+            question: "How do you write scripts inside your hmtl?"
+            ,choices: ["<link>", "{script}", "app.js", "<script>"]
+            ,correctAnswer: 3
+        }
+        ,{
+            question: "Which variable has a value of undefined?"
+            ,choices: ["var a;", "var b = [];", "var c = false;", "var d = 0;"]
+            ,correctAnswer: 0
+        }
+        ,{
+            question: "Which function requires the user to type?"
+            ,choices: ["alert()", "prompt()", "ask()", "confirm()"]
             ,correctAnswer: 1
         }
         ,{
-            question: "What is the Raptors"
-            ,choices: ["baseball team", "football team", "soccer team", "basketball team"]
-            ,correctAnswer: 3
+            question: "Click on 'less than or equal to'"
+            ,choices: [">=", "<=", "!<=", "!="]
+            ,correctAnswer: 1
+        }
+        ,{
+            question: "How do you put comments"
+            ,choices: ["!!", "||", "\\", "//"]
+            ,correctAnswer: 3 
+        }
+        ,{
+            question: "How do you add an external script?"
+            ,choices: ["<script='app.js'>", "<scripts href='app.js'>", "<scripts src='app.js'>", "<scripts name='app.js'>"]
+            ,correctAnswer: 2
         }
     ]
     ,initialize : function() {
@@ -57,6 +80,10 @@ var TriviaGame = {
 
 function askAQuestion() {
     if(debug){console.log("function: askAQuestion");}
+
+    removeTransparent();
+    global_wait_while_answer_displayed = false;
+
     //get a question
     TriviaGame.getTheNextQuestion();
     //post the question
@@ -98,6 +125,10 @@ function clearThePreviousSelection() {
 function checkTheAnswer(buttonClicked) {
     if(debug){console.log("function: checkTheAnswer ");}
 
+    if(TriviaGame.gameOver) {
+        return false;
+    }
+    
     //first let's stop all timers
     clearAllTimers();
     //store player's answer
@@ -115,15 +146,14 @@ function checkTheAnswer(buttonClicked) {
     $("#option" + buttonClicked).addClass("player-clicked");
     $("#hand" + TriviaGame.currentQuestion.correctAnswer).removeClass("hidden");
     
-    var wait5seconds = setTimeout(askAQuestion, 5000);
-    if(debug){console.log("5 second delay to show the correct answer");}
-
-    //cleanup
+    //make the clock opaque
+    makeTransparent();
+    //set this flag so that any click event can be ignored by the event handler
+    global_wait_while_answer_displayed = true;
+    var wait5seconds = setTimeout(askAQuestion, global_show_answer_timeout * 1000);
+    if(debug){console.log(global_show_answer_timeout," second delay to show the correct answer");}
 }
 
-
-
-// TODO: review this part
 function timedOut() {
     if(debug){console.log("function: timedOut ");}
     var didntSelect;
@@ -139,10 +169,25 @@ function savethePlayersAnswer(buttonClicked) {
 function gameOver() {
     if(debug){console.log("gameOver")}
     
-    // TODO: disable the click event
-    // TODO: show the play button 
+    TriviaGame.gameOver = true;
+    //disable the click event
+    turnOFFClickOptions()
+    //hide the timer
+    hideTimer();
+    //show the play button 
+    showPlayButton();
+    //show score
+    showScore();
 }
 
+function showScore() {
+    clearThePreviousSelection();
+    $("#question").text("Your Score");
+    $("#option0").text("Hits");
+    $("#option1").text(TriviaGame.numberOfCorrectAnswers);
+    $("#option2").text("Misses");
+    $("#option3").text(TriviaGame.numberOfMistakes);
+}
 
 // ALL ABOUT EVENTS -------------------------------------
 
@@ -152,10 +197,15 @@ $(document).ready(function(){
     $("#btn_start").on("click", function(){
         prepareTheBoard();
         askAQuestion();
+        TriviaGame.gameOver = false;
     });
 });
 
 function ClickEventHandler(buttonClicked) {
+    //don't process any click while the previous answer is on screen
+    if(global_wait_while_answer_displayed) {
+        return false;
+    }
     checkTheAnswer(buttonClicked);
 }
 
@@ -174,11 +224,7 @@ function turnOFFClickOptions(){
     if(debug){console.log("Disabled handler for 'options' click event");}
     
     //Player clicked on one of the given options
-    $(".options").off("click", function(){
-        var buttonClicked = $(this).attr("value");
-        if(debug){console.log("Clicked on button index ", buttonClicked)}
-        ClickEventHandler(buttonClicked);
-    });
+    $(".options").off("click");
 }
 // ------------------------------------------
 
@@ -196,19 +242,21 @@ function startTheTimer() {
     //clear the '30s timeout' and '1s interval"
     clearAllTimers();
     //start the 30s timer
-    start30SecondTimer();
+    startTheClock();
 }
 
 function clearAllTimers() {
     clearTimeout(global_thirty_second_timeout);
     clearInterval(global_one_second_interval);
+    //clear the clock on the screen
+    $(".clock").empty();
 }
 
-function start30SecondTimer() {
+function startTheClock() {
     if(debug){console.log("function: run30secondTimerl");}
-    global_timeRemaining = 15;
-    global_thirty_second_timeout = setTimeout(checkTheAnswer, global_timeRemaining * 1000);
-    $(".clock").text(global_timeRemaining);
+    global_thirty_second_timeout = setTimeout(checkTheAnswer, global_timeAllotted * 1000);
+    $(".clock").text(global_timeAllotted);
+    global_timeRemaining = global_timeAllotted;
     //start a 1 second timer that will refresh the 'time remaining' every second
     startOneSecondTimer();
 }
@@ -236,6 +284,11 @@ function hidePlayButton(){
 function showPlayButton(){
     if(debug) {console.log("function: showPlayButton")}
     $(".container_button").removeClass("hidden");
+    if(TriviaGame.numberOfMistakes!==0) {
+        $("#btn_start").text("I want to try again");
+    } else {
+        $("#btn_start").text("That was too easy");
+    }
 }
 
 function hideTimer(){
@@ -246,4 +299,14 @@ function hideTimer(){
 function showTimer(){
     if(debug) {console.log("function: showTimer")}
     $(".container_timer").removeClass("hidden");
+}
+
+function makeTransparent() {
+    if(debug) {console.log("function: makeTransparent")}
+    $(".container_timer").addClass("opaque");
+}
+
+function removeTransparent() {
+    if(debug) {console.log("function: removeTransparent")}
+    $(".container_timer").removeClass("opaque");
 }
