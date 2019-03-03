@@ -5,13 +5,11 @@
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
-    /* border: 1px dotted red; */
     background-color: rgb(241, 238, 233);
     font-size: 2em;
     font-family: 'Cabin Sketch', cursive;
 }
 .heading {
-    /* margin: 15px 0; */
     padding: 10px 0;
     font-family: 'Monoton', cursive;
     background-color: rgb(240, 224, 205);
@@ -19,38 +17,37 @@
 
 }
 .heading:hover {
-    /* margin: 10px 0; */
     color: white;
     background-color:black;
 }
 .container_question {
     font-size: 2.2rem;
     margin: 10px 0;
+    font-weight: bold;
 }
 .container_options {
     font-size: 1.5rem;
 }
 #btn_start {
     margin: 10px 0;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-family: 'Cabin Sketch', cursive;
-    line-height: 30px;   
+    line-height: 1.5;   
     background-color:   rgb(241, 238, 233);
-    /* border: none; */
 }
 #btn_start:hover {
-    font-size: 2.0rem;
-    padding: 10px ;
-    /* border: none; */
+    font-size: 2.5rem;
+    padding: 0 20px ;
 }
 
 .options:hover {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     cursor: pointer;
 }
 .options {
     margin: 20px 0;
-    line-height: 30px;   
+    font-size: 2.2rem;
+    line-height: 1.5;   
 }
 .player-clicked {
     background-color:  rgb(212, 194, 154);
@@ -68,9 +65,11 @@
 }
 .container_timer {
     font-size: 2rem;
-    /* margin: 20px; */
     padding: 10px;
 }
 .clock {
     margin: 20px;
+}
+.opaque {
+    opacity: 0;
 }
