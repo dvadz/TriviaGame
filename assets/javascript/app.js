@@ -54,7 +54,7 @@ var TriviaGame = {
             ,correctAnswer: 2
         }
         ,{
-            question: "What a the keyword for creating variables"
+            question: "What is a the keyword for creating variables"
             ,choices: ["for", "function", "return", "var"]
             ,correctAnswer: 3
         }    
