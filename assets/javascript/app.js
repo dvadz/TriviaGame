@@ -1,5 +1,5 @@
 'use strict'
-var debug = true;
+var debug = false;
 
 //timers
 var global_thirty_second_timeout, global_one_second_interval;
@@ -53,6 +53,11 @@ var TriviaGame = {
             ,choices: ["<script='app.js'>", "<scripts href='app.js'>", "<scripts src='app.js'>", "<scripts name='app.js'>"]
             ,correctAnswer: 2
         }
+        ,{
+            question: "What a the keyword for creating variables"
+            ,choices: ["for", "function", "return", "var"]
+            ,correctAnswer: 3
+        }    
     ]
     ,initialize : function() {
         if(debug){console.log("TriviaGame: initialize")};
