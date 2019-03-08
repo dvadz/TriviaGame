@@ -5,7 +5,7 @@ var debug = false;
 var global_thirty_second_timeout, global_one_second_interval;
 
 //numbers in seconds
-var global_timeRemaining, global_timeAllotted = 20;
+var global_timeRemaining, global_timeAllotted = 7;
 var global_show_answer_timeout = 3;
 var global_wait_while_answer_displayed = false;
 
