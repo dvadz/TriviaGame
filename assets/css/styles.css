@@ -1,75 +1,73 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-    background-color: rgb(241, 238, 233);
-    font-size: 2em;
-    font-family: 'Cabin Sketch', cursive;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgb(241, 238, 233);
+  font-size: 2em;
+  font-family: "Cabin Sketch", cursive;
 }
 .heading {
-    padding: 10px 0;
-    font-family: 'Monoton', cursive;
-    background-color: rgb(240, 224, 205);
-    border:     2px solid  rgb(240, 224, 205);
-
+  padding: 10px 0;
+  font-family: "Monoton", cursive;
+  background-color: rgb(240, 224, 205);
+  border: 2px solid rgb(240, 224, 205);
 }
 .heading:hover {
-    color: white;
-    background-color:black;
+  color: white;
+  background-color: black;
 }
 .container_question {
-    font-size: 2.2rem;
-    margin: 10px 0;
-    font-weight: bold;
+  font-size: 2.2rem;
+  margin: 10px 0;
+  font-weight: bold;
 }
 .container_options {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 #btn_start {
-    margin: 10px 0;
-    font-size: 2.2rem;
-    font-family: 'Cabin Sketch', cursive;
-    line-height: 1.5;   
-    background-color:   rgb(241, 238, 233);
+  margin: 10px 0;
+  font-size: 2.2rem;
+  font-family: "Cabin Sketch", cursive;
+  line-height: 1.5;
+  background-color: rgb(241, 238, 233);
 }
 #btn_start:hover {
-    font-size: 2.5rem;
-    padding: 0 20px ;
+  font-size: 2.5rem;
+  padding: 0 20px;
 }
 
 .options:hover {
-    font-size: 2.5rem;
-    cursor: pointer;
+  font-size: 2.5rem;
+  cursor: pointer;
 }
 .options {
-    margin: 20px 0;
-    font-size: 2.2rem;
-    line-height: 1.5;   
+  margin: 20px 0;
+  font-size: 2.2rem;
+  line-height: 1.5;
 }
 .player-clicked {
-    background-color:  rgb(212, 194, 154);
-
+  background-color: rgb(212, 194, 154);
 }
 .hand {
-    color: rgb(117, 219, 117);
-    font-size: 2.2rem;
+  color: rgb(117, 219, 117);
+  font-size: 2.2rem;
 }
 .hidden {
-    display: none;
+  display: none;
 }
 .music {
-    color:rgb(240, 224, 205);
+  color: rgb(240, 224, 205);
 }
 .container_timer {
-    font-size: 2rem;
-    padding: 10px;
+  font-size: 2rem;
+  padding: 10px;
 }
 .clock {
-    margin: 20px;
+  margin: 20px;
 }
 .opaque {
-    opacity: 0;
+  opacity: 0;
 }
