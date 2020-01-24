@@ -1,8 +1,8 @@
 # TriviaGame
 
-Test your knowledge of basic Javascript on this fast-paced trivia game.
+This is trivia game that asks very basic Javacript questions.
 
-You will be presented with a question and four options. Click on your choice and the correct answer will be revealed.
+The game starts when the player presses Start. The game presents each question with four possible answers to choose from. The font of the answers get bigger when the mouse hovers over them. The answer that the player selects gets highlighted and then correct answer is revealed. To make it more interesting, each question needs to be answered before a short timer expires. At the end of the game the tally of correct and wrong answers are shown.
 
 Technologies: 
 - HTML
