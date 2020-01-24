@@ -34,14 +34,15 @@
 
 #btn_start {
   margin: 10px 0;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-family: "Cabin Sketch", cursive;
   line-height: 1.5;
   background-color: rgb(241, 238, 233);
+  border-radius: 5px;
 }
 #btn_start:hover {
-  font-size: 2.5rem;
-  padding: 0 20px;
+  background-color: rgb(202, 182, 147);
+  transform: translateY(-5px);
 }
 
 .player-clicked {
