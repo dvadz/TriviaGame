@@ -20,13 +20,18 @@
   background-color: black;
 }
 .container_question {
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin: 10px 0;
   font-weight: bold;
 }
-.container_options {
-  font-size: 1.5rem;
+.container_options p {
+  margin: 20px 0;
+  font-size: 2rem;
 }
+.container_options p:hover {
+  transform: scale(1.2);
+}
+
 #btn_start {
   margin: 10px 0;
   font-size: 2.2rem;
@@ -39,15 +44,6 @@
   padding: 0 20px;
 }
 
-.options:hover {
-  font-size: 2.5rem;
-  cursor: pointer;
-}
-.options {
-  margin: 20px 0;
-  font-size: 2.2rem;
-  line-height: 1.5;
-}
 .player-clicked {
   background-color: rgb(212, 194, 154);
 }
