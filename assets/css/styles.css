@@ -29,6 +29,7 @@
   font-size: 2rem;
 }
 .container_options p:hover {
+  cursor: pointer;
   transform: scale(1.2);
 }
 
@@ -41,6 +42,7 @@
   border-radius: 5px;
 }
 #btn_start:hover {
+  cursor: pointer;
   background-color: rgb(202, 182, 147);
   transform: translateY(-5px);
 }
